@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
@@ -36,16 +35,18 @@ namespace Anhstein.CodeJam
         {
             get
             {
-                //System.AppContext.BaseDirectory returns [BaseDirectory]\bin\Debug\netcoreapp1.1
+                //System.AppContext.BaseDirectory returns  [ProjectDirectory]\bin\Debug\netcoreapp1.1
+                //The input dir follows this sample format [ProjectDirectory]\2017IO\TicketTrouble
                 return Path.GetFullPath(Path.Combine(System.AppContext.BaseDirectory, @"..\..\..", ContestName, ProblemName));
             }
         }
 
         [Theory]
         [InlineData("sample.in")]
-        [InlineData("A-small-attempt0.in")]
-        [InlineData("A-large.in")]
-        public void Run(string inputFile)
+        //[InlineData("A-small-attempt0.in")]
+        //[InlineData("A-large.in")]
+        //[InlineData("A-small-practice.in")]
+        public virtual void Run(string inputFile)
         {
             inputFile = Path.Combine(InputFolder, inputFile);
             Output.WriteLine(inputFile);

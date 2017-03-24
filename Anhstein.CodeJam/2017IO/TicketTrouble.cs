@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace Anhstein.CodeJam
@@ -11,6 +12,13 @@ namespace Anhstein.CodeJam
     {
         public TicketTrouble(ITestOutputHelper output) : base(output)
         {
+        }
+
+        [InlineData("A-small-attempt0.in")]
+        [InlineData("A-large.in")]
+        public override void Run(string inputFile)
+        {
+            base.Run(inputFile);
         }
 
         public override object Solve(StreamReader reader)

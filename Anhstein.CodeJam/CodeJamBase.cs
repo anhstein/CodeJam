@@ -1,5 +1,7 @@
 using System;
+using System.ComponentModel;
 using System.IO;
+using System.Reflection;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -22,11 +24,30 @@ namespace Anhstein.CodeJam
             }
         }
         
+        public string ContestName
+        {
+            get
+            {
+                return this.GetType().GetTypeInfo().GetCustomAttribute<DescriptionAttribute>().Description;
+            }
+        }
+
+        public string InputFolder
+        {
+            get
+            {
+                //System.AppContext.BaseDirectory returns [BaseDirectory]\bin\Debug\netcoreapp1.1
+                return Path.GetFullPath(Path.Combine(System.AppContext.BaseDirectory, @"..\..\..", ContestName, ProblemName));
+            }
+        }
+
         [Theory]
         [InlineData("sample.in")]
+        [InlineData("A-small-attempt0.in")]
+        [InlineData("A-large.in")]
         public void Run(string inputFile)
         {
-            inputFile = Path.Combine(Directory.GetCurrentDirectory(), ProblemName, inputFile);
+            inputFile = Path.Combine(InputFolder, inputFile);
             Output.WriteLine(inputFile);
             Assert.False(string.IsNullOrEmpty(inputFile));
             Assert.True(File.Exists(inputFile));

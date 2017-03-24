@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using Xunit.Abstractions;
 
 namespace Anhstein.CodeJam
 {
+    [Description("2017IO")]
     public class TicketTrouble : CodeJamBase
     {
         public TicketTrouble(ITestOutputHelper output) : base(output)
